@@ -8,7 +8,6 @@ export default async function Gallery() {
     const [supabase] = await Promise.all([createServerComponentClient({cookies})])
     const { data:{session} } = await supabase.auth.getSession()
     const {data} = await supabase.from('images').select('*').order('created_at', {ascending: false})
-
     // @ts-ignore
     const images: ImageType[] = data
     return (

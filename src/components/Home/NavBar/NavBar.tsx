@@ -4,7 +4,7 @@ import Image from "next/image";
 import cloudinaryLoader from "@/utils/Loader";
 import {LogoutLogo} from "@/components/assets/icons/Logout";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
 import {Session} from "@supabase/supabase-js";
 import {Logo} from "@/components/assets/icons/Logo";
 import {Menu, Transition} from "@headlessui/react";

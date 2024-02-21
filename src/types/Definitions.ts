@@ -1,3 +1,5 @@
+import {Session, SupabaseClient} from "@supabase/auth-helpers-nextjs";
+
 export interface responseTypes {
     info:ImageType
     event: "success" | "error" | "progress";
@@ -12,4 +14,9 @@ export interface ImageType {
     width: number;
     original_filename: string;
     blurImage?: string;
+}
+
+export interface SupabaseContextType {
+    supabase: SupabaseClient,
+    authSession: Session | null
 }

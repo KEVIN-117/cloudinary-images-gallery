@@ -9,8 +9,7 @@ import {Upload} from "@/components/assets/icons/Upload";
 
 
 export function Uploader(){
-
-    const supabase = createClientComponentClient({})
+    const supabase = createClientComponentClient()
     const router = useRouter()
 
     const handleInsert = async (image: ImageType ) => {
@@ -32,6 +31,15 @@ export function Uploader(){
                 onUpload={async (response) => {
                     // @ts-ignore
                     await handleInsert(response.info)
+                }}
+                onSuccess={(response) => {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Image uploaded",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }}
                 onAbort={(response) => {
                     Swal.fire({

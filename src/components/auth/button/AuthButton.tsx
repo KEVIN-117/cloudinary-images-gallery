@@ -1,11 +1,11 @@
 "use client"
 import {GitHub} from "@/components/assets/icons/GitHub";
-import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
-import { useRouter } from 'next/navigation'
 import {GitLab} from "@/components/assets/icons/GitLab";
+import {useContext} from "react";
+import {SupabaseContextType} from "@/types/Definitions";
+import {SupabaseContext} from "@/context/SupabaseContext";
 export function AuthButton() {
-    const supabase = createClientComponentClient()
-    const router = useRouter()
+    const { supabase } = useContext<SupabaseContextType | any>(SupabaseContext)
     const handleAuthGitHub = async () => {
         await supabase.auth.signInWithOAuth({
             provider: "github",

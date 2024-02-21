@@ -1,15 +1,15 @@
 "use client";
 import Image from "next/image";
-import {ImageType} from "@/types/Definitions";
+import {ImageType, SupabaseContextType} from "@/types/Definitions";
 import { Dialog, Transition } from '@headlessui/react'
-import {Fragment, useEffect, useState} from 'react'
+import {Fragment, useContext, useState} from 'react'
 import downloadPhoto from "@/utils/Downloader";
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from "next/navigation"
 import Swal from "sweetalert2";
+import {SupabaseContext} from "@/context/SupabaseContext";
 export function Card({image}:{image: ImageType} ){
+    const { supabase, authSession } = useContext<SupabaseContextType | any>(SupabaseContext)
     const [isOpen, setIsOpen] = useState(false)
-    const supabase = createClientComponentClient()
     const router = useRouter()
     function closeModal() {
         setIsOpen(false)
@@ -117,7 +117,7 @@ export function Card({image}:{image: ImageType} ){
                                                           d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                                 </svg>
                                             </button>
-                                            <button
+                                            {authSession && (<button
                                                 className='bg-indigo-950 rounded-full p-2'
                                                 onClick={async () => {
                                                     await deleteImage(image)
@@ -131,7 +131,7 @@ export function Card({image}:{image: ImageType} ){
                                                           clipRule="evenodd"/>
                                                 </svg>
 
-                                            </button>
+                                            </button>)}
                                         </div>
                                         <div className='flex flex-col gap-1'>
                                             <button
