@@ -3,7 +3,6 @@ import {Card} from "@/components/Card";
 import {createServerComponentClient} from "@supabase/auth-helpers-nextjs";
 import {cookies} from "next/headers";
 import {Uploader} from "@/components/Uploader";
-import getBase64ImageUrl from "@/utils/generateBlurPlaceholder";
 export const dynamic = 'force-dynamic'
 export default async function Gallery() {
     const [supabase] = await Promise.all([createServerComponentClient({cookies})])
@@ -12,7 +11,6 @@ export default async function Gallery() {
 
     // @ts-ignore
     const images: ImageType[] = data
-
     return (
         <div className="grid grid-cols-1 gap-7 my-10">
             {session && <Uploader/>}

@@ -4,6 +4,7 @@ export interface responseTypes {
 }
 
 export interface ImageType {
+    id: any;
     path: string;
     public_id: string;
     secure_url: string;

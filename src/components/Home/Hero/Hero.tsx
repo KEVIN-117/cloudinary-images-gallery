@@ -25,12 +25,13 @@ export default function Hero() {
                         ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                         <Logo width={100} heigth={100}/>
                         bienvenido a nuestra galería de imágenes
+                        <code>this is test branch</code>
                     </div>
                     <div className="text-center ">
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
                             <span
                                 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
-                                Explora el Mundo a Través de Nuestras Imágenes: Bienvenido a Nuestra Galería
+                                Explora el Mundo a Través de Nuestras Imágenes
                             </span>
 
                         </h1>

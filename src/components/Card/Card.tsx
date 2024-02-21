@@ -4,10 +4,13 @@ import {ImageType} from "@/types/Definitions";
 import { Dialog, Transition } from '@headlessui/react'
 import {Fragment, useEffect, useState} from 'react'
 import downloadPhoto from "@/utils/Downloader";
-
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from "next/navigation"
+import Swal from "sweetalert2";
 export function Card({image}:{image: ImageType} ){
     const [isOpen, setIsOpen] = useState(false)
-    const [blurDataUrl, setBlurDataUrl] = useState<string>("")
+    const supabase = createClientComponentClient()
+    const router = useRouter()
     function closeModal() {
         setIsOpen(false)
     }
@@ -15,16 +18,28 @@ export function Card({image}:{image: ImageType} ){
     function openModal() {
         setIsOpen(true)
     }
-    useEffect(()=>{
-        async function getBase64ImageUrl(image: ImageType){
-            let {secure_url} = image
-            const response = await fetch(secure_url);
-            const buffer = await response.arrayBuffer();
-            const url = `data:image/jpeg;base64,${Buffer.from(buffer).toString("base64")}`;
-            return url;
+
+    async function deleteImage(Image: ImageType){
+        const { error} = await supabase.from('images').delete().eq('public_id', Image.public_id)
+        if (error) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Image delete failed",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }else {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Image deleted",
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
-        getBase64ImageUrl(image).then((url) => setBlurDataUrl(url))
-    })
+        router.refresh()
+    }
     return(
         <>
             <button
@@ -90,23 +105,44 @@ export function Card({image}:{image: ImageType} ){
                                     />
                                     <div
                                         className="absolute top-0 w-[98%] pt-2 flex justify-between p-2">
-                                        <button className='bg-indigo-950 rounded-full p-2' onClick={closeModal}>
-                                            <svg className="w-10 h-10 text-white"
-                                                 aria-hidden="true"
-                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" strokeLinecap="round"
-                                                      strokeLinejoin="round"
-                                                      strokeWidth="2"
-                                                      d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                        </button>
+
+                                        <div className='flex flex-col gap-1'>
+                                            <button className='bg-indigo-950 rounded-full p-2' onClick={closeModal}>
+                                                <svg className="w-10 h-10 text-white"
+                                                     aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" strokeLinecap="round"
+                                                          strokeLinejoin="round"
+                                                          strokeWidth="2"
+                                                          d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                </svg>
+                                            </button>
+                                            <button
+                                                className='bg-indigo-950 rounded-full p-2'
+                                                onClick={async () => {
+                                                    await deleteImage(image)
+                                                }}
+                                            >
+                                                <svg className="w-10 h-10 text-gray-800 dark:text-white"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 24 24">
+                                                    <path fillRule="evenodd"
+                                                          d="M8.6 2.6A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4c0-.5.2-1 .6-1.4ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
+                                                          clipRule="evenodd"/>
+                                                </svg>
+
+                                            </button>
+                                        </div>
                                         <div className='flex flex-col gap-1'>
                                             <button
                                                 className='bg-indigo-950 rounded-full p-2'
                                                 onClick={() => window.open(image.secure_url, "_blank")}
                                             >
-                                                <svg className="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 14v4.8a1.2 1.2 0 0 1-1.2 1.2H5.2A1.2 1.2 0 0 1 4 18.8V7.2A1.2 1.2 0 0 1 5.2 6h4.6m4.4-2H20v5.8m-7.9 2L20 4.2"/>
+                                                <svg className="w-10 h-10 text-white" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" strokeLinecap="round"
+                                                          strokeLinejoin="round" strokeWidth="2"
+                                                          d="M18 14v4.8a1.2 1.2 0 0 1-1.2 1.2H5.2A1.2 1.2 0 0 1 4 18.8V7.2A1.2 1.2 0 0 1 5.2 6h4.6m4.4-2H20v5.8m-7.9 2L20 4.2"/>
                                                 </svg>
                                             </button>
                                             <button

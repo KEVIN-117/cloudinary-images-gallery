@@ -10,7 +10,7 @@ export function AuthButton() {
         await supabase.auth.signInWithOAuth({
             provider: "github",
             options: {
-                redirectTo: `${process.env.NEXT_PUBLIC_REDIRECT_URL_PROVIDER}`
+                redirectTo: `${process.env.NODE_ENV === "development" ? "http://localhost:3000" : process.env.NEXT_PUBLIC_REDIRECT_URL_PROVIDER}`
             }
         })
 
@@ -19,11 +19,10 @@ export function AuthButton() {
         await supabase.auth.signInWithOAuth({
             provider:"gitlab",
             options:{
-                redirectTo: `${process.env.NEXT_PUBLIC_REDIRECT_URL_PROVIDER}`
+                redirectTo: `${process.env.NODE_ENV === "development" ? "http://localhost:3000" : process.env.NEXT_PUBLIC_REDIRECT_URL_PROVIDER}`
             }
         })
     }
-
     return (
         <div className='flex flex-col gap-2 justify-center items-center w-full'>
 

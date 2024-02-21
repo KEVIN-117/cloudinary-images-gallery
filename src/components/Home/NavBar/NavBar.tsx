@@ -15,7 +15,6 @@ export function NavBar({session}:{session: Session | null}){
     const router = useRouter()
     const handleLogout = async ()=>{
         await supabase.auth.signOut()
-
         router.refresh()
     }
 

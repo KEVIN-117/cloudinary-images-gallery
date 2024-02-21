@@ -85,6 +85,7 @@ export default function Footer() {
                                 ¡Nos encantaría escuchar tu opinión, sugerencias o simplemente charlar sobre el
                                 arte de la fotografía! Conecta con nosotros en las redes sociales o envíanos un mensaje.
                                 ¡Que la luz siempre esté de tu lado en tus aventuras fotográficas!
+
                             </dd>
                             <div className="flex justify-center items-center w-full my-5 gap-5">
                                 <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
@@ -93,9 +94,7 @@ export default function Footer() {
                                 <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
                                     <YouTube/>
                                 </div>
-                                <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
-                                    <Twitter/>
-                                </div>
+
                             </div>
                         </div>
                     </dl>
