@@ -1,19 +1,14 @@
-
+"use client"
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from "next/link";
 import { usePathname } from 'next/navigation'
 
 const navigation = [
-    { name: 'Dashboard', href: '/', current: true },
-    { name: 'Gallery', href: '/gallery', current: false },
+    { name: 'Gallery', href: '/dashboard/gallery', current: false },
     { name: 'Projects', href: '#', current: false },
     { name: 'Calendar', href: '#', current: false },
 ]
-
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
-}
 
 export function Navigation() {
     const pathname = usePathname()
@@ -57,7 +52,7 @@ export function Navigation() {
                     </div>
 
                     <Disclosure.Panel className="sm:hidden">
-                        <div className="space-y-1 px-2 pb-3 pt-2 h-screen">
+                        <div className="space-y-1 px-2 pb-3 pt-2 h-auto">
                             {navigation.map((item) => (
                                 <Disclosure.Button
                                     key={item.name}

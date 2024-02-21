@@ -1,39 +1,51 @@
 "use client"
 import {GitHub} from "@/components/assets/icons/GitHub";
 import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
-import {LogoutLogo} from "@/components/assets/icons/Logout";
-import {Session} from "@supabase/supabase-js";
-import Image from "next/image";
-import cloudinaryLoader from "@/utils/Loader";
 import { useRouter } from 'next/navigation'
-export function AuthButton({session}: {session: Session | null}) {
+import {GitLab} from "@/components/assets/icons/GitLab";
+export function AuthButton() {
     const supabase = createClientComponentClient()
     const router = useRouter()
-    const handleAuth = async () => {
+    const handleAuthGitHub = async () => {
         await supabase.auth.signInWithOAuth({
             provider: "github",
             options: {
-                redirectTo: 'https://cloudinary-images-gallery.vercel.app/auth/callback'
+                redirectTo: `${process.env.NEXT_PUBLIC_REDIRECT_URL_PROVIDER}`
             }
         })
 
     }
-    const handleLogout = async () => {
-        await supabase.auth.signOut()
-        router.refresh()
+    const handleAuthGitLab = async ()=>{
+        await supabase.auth.signInWithOAuth({
+            provider:"gitlab",
+            options:{
+                redirectTo: `${process.env.NEXT_PUBLIC_REDIRECT_URL_PROVIDER}`
+            }
+        })
     }
 
     return (
-        <div className='flex gap-2 justify-center items-center'>
+        <div className='flex flex-col gap-2 justify-center items-center w-full'>
 
-                <button
-                    type="button"
-                    className="text-white uppercase bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2"
-                    onClick={handleAuth}
-                >
-                    <GitHub/>
-                    Sign in with Github
-                </button>
+            <button
+                type="button"
+                className="flex justify-evenly items-center w-full text-white border
+                font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:hover:bg-[#050708]/30 me-2 mb-2"
+                onClick={handleAuthGitHub}
+            >
+                <GitHub  height={30} width={30}/>
+                Iniciar sesión con Github
+            </button>
+
+            <button
+                type="button"
+                className="flex justify-evenly items-center w-full text-white border
+                font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:hover:bg-[#050708]/30 me-2 mb-2"
+                onClick={handleAuthGitLab}
+            >
+                <GitLab height={30} width={30}/>
+                Iniciar sesión con Gitlab
+            </button>
 
         </div>
     )

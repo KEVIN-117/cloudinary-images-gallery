@@ -10,4 +10,5 @@ export interface ImageType {
     height: number;
     width: number;
     original_filename: string;
+    blurImage?: string;
 }

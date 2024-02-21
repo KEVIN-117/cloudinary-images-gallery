@@ -4,17 +4,18 @@ import Image from "next/image";
 import cloudinaryLoader from "@/utils/Loader";
 import {LogoutLogo} from "@/components/assets/icons/Logout";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import {Session} from "@supabase/supabase-js";
 import {Logo} from "@/components/assets/icons/Logo";
-import {Navigation} from "@/components/Home/NavBar/Navigation";
 import {Menu, Transition} from "@headlessui/react";
 import {Fragment} from "react";
+import {Navigation} from "@/components/Home/NavBar/Navigation";
 export function NavBar({session}:{session: Session | null}){
     const supabase = createClientComponentClient()
     const router = useRouter()
     const handleLogout = async ()=>{
         await supabase.auth.signOut()
+
         router.refresh()
     }
 
@@ -37,22 +38,19 @@ export function NavBar({session}:{session: Session | null}){
                     <div className="flex items-center space-x-6 rtl:space-x-reverse">
                         {session === null ? (
                             <Link
-                                href="/login"
-                                className="text-sm  text-blue-600 dark:text-blue-500 hover:underline"
+                                href="/auth/login"
+                                className="text-sm dark:text-blue-500 font-semibold leading-6 text-gray-900 border-2 rounded-md border-blue-700 py-2 px-3"
                             >
-                                Login
+                                Login <span aria-hidden="true">&rarr;</span>
                             </Link>
                         ) : (
                             <>
-                                <div className="flex justify-center items-center">
-
-
-                                </div>
 
                                 <Menu as="div" className="relative">
                                     <div>
-                                        <Menu.Button className="relative border-2 border-blue-800 flex rounded-full text-sm">
-                                            <span className="absolute -inset-1.5" />
+                                        <Menu.Button
+                                            className="relative border-2 border-blue-800 flex rounded-full text-sm">
+                                        <span className="absolute -inset-1.5" />
                                             <span className="sr-only">Open user menu</span>
                                             <Image
                                                 loader={cloudinaryLoader}
@@ -91,6 +89,14 @@ export function NavBar({session}:{session: Session | null}){
                                                 <div className="flex-1 text-sm text-gray-500 dark:text-gray-400">{session?.user.user_metadata.user_name}</div>
                                             </Menu.Item>
                                             <Menu.Item>
+                                                <Link
+                                                    href="/dashboard"
+                                                    className="flex w-full text-white uppercase bg-[#24292F] font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center"
+                                                >
+                                                    <span className='flex-1'>dashboard</span>
+                                                </Link>
+                                            </Menu.Item>
+                                            <Menu.Item>
                                                 <button
                                                     type="button"
                                                     className="flex w-full text-white uppercase bg-[#24292F] font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center"
@@ -107,8 +113,8 @@ export function NavBar({session}:{session: Session | null}){
                         )}
                     </div>
                 </div>
+                <Navigation/>
             </nav>
-            {session !== null && <Navigation/>}
 
         </>
 
