@@ -25,6 +25,7 @@ export default function Hero() {
                         ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                         <Logo width={100} heigth={100}/>
                         bienvenido a nuestra galería de imágenes
+                        <code className="text-xs font-bold text-gray-500 dark:text-gray-400">this change is in the test branch </code>
                     </div>
                     <div className="text-center ">
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
