@@ -14,7 +14,6 @@ export default async function Gallery() {
         <div className="grid grid-cols-1 gap-7 my-10">
             {session && <Uploader/>}
             <div className="w-[95%] mx-auto columns-1 sm:columns-2 md:columns-3 xl:columns-4 2xl:columns-5 gap-4">
-
                 {images && images.map((image) => (
                     <Card key={image.original_filename + image.public_id} image={image}/>
                 ))}

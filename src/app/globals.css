@@ -74,3 +74,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+.image{
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.show{
+  opacity: 1;
+  transition: opacity 0.5s;
+
+}

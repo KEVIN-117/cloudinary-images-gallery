@@ -2,14 +2,16 @@
 import Image from "next/image";
 import {ImageType, SupabaseContextType} from "@/types/Definitions";
 import { Dialog, Transition } from '@headlessui/react'
-import {Fragment, useContext, useState} from 'react'
+import {Fragment, useContext, useEffect, useState} from 'react'
 import downloadPhoto from "@/utils/Downloader";
 import { useRouter } from "next/navigation"
 import Swal from "sweetalert2";
 import {SupabaseContext} from "@/context/SupabaseContext";
+import {useElementBoundaryObserver} from "@/utils/useElementBoundaryObserver";
 export function Card({image}:{image: ImageType} ){
     const { supabase, authSession } = useContext<SupabaseContextType | any>(SupabaseContext)
     const [isOpen, setIsOpen] = useState(false)
+    const [ ref, boundary ] = useElementBoundaryObserver(0.5)
     const router = useRouter()
     function closeModal() {
         setIsOpen(false)
@@ -43,8 +45,9 @@ export function Card({image}:{image: ImageType} ){
     return(
         <>
             <button
+                ref={ref}
                 key={image.public_id + image.original_filename}
-                className="transition ease-in-out hover:shadow-red-700 shadow-xl delay-200 hover:-translate-y-1 hover:scale-105
+                className="image transition ease-in-out hover:shadow-red-700 shadow-xl delay-200 hover:-translate-y-1 hover:scale-105
             after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0
             after:rounded-lg after:shadow-highlight"
                 onClick={openModal}
