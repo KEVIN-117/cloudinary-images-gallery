@@ -1,4 +1,4 @@
-import {Auth} from "@/components/auth/Auth";
+import { Auth } from "@/components/organisms/auth/Auth";
 
 
 // TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
@@ -6,6 +6,6 @@ import {Auth} from "@/components/auth/Auth";
 export const instant = false;
 
 
-export default function LoginPage(){
+export default function LoginPage() {
     return <Auth isLogin={true} />
 }

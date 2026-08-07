@@ -1,7 +1,7 @@
-import {Session, SupabaseClient} from "@supabase/auth-helpers-nextjs";
+import { Session, SupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export interface responseTypes {
-    info:ImageType
+    info: ImageType
     event: "success" | "error" | "progress";
 }
 

@@ -1,0 +1,94 @@
+"use client"
+
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+import { Input } from "@/components/atoms/input"
+import { Label } from "@/components/atoms/label"
+import { AuthButton } from "@/components/organisms/auth/button/AuthButton";
+import Link from "next/link";
+
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
+
+export function UserAuthLogin({ className, ...props }: UserAuthFormProps) {
+    const [isLoading, setIsLoading] = React.useState<boolean>(false)
+
+    async function onSubmit(event: React.SyntheticEvent) {
+        event.preventDefault()
+        setIsLoading(true)
+
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 3000)
+    }
+
+    return (
+        <div className={cn("flex flex-col gap-y-7", className)} {...props}>
+            <form onSubmit={onSubmit}>
+                <div className="grid gap-2">
+                    <div className="grid gap-1">
+                        <Label className="sr-only" htmlFor="email">
+                            Email
+                        </Label>
+                        <Input
+                            id="email"
+                            placeholder="name@example.com"
+                            type="email"
+                            autoCapitalize="none"
+                            autoComplete="email"
+                            autoCorrect="off"
+                            disabled={isLoading}
+                        />
+                    </div>
+                    <div className="grid gap-1">
+                        <Label className="sr-only" htmlFor="email">
+                            Email
+                        </Label>
+                        <Input
+                            id="password"
+                            placeholder="password"
+                            type="email"
+                            autoCapitalize="none"
+                            autoComplete="email"
+                            autoCorrect="off"
+                            disabled={isLoading}
+                        />
+                    </div>
+                    <button disabled={isLoading}
+                        className="flex justify-evenly items-center w-full text-white border
+                font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:hover:bg-[#050708]/30 me-2 mb-2"
+                    >
+                        Iniciar sesión
+                    </button>
+                </div>
+            </form>
+            <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                        o continuar con
+                    </span>
+                </div>
+            </div>
+            <AuthButton />
+            <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                        o
+                    </span>
+                </div>
+            </div>
+            <Link href="/auth/register"
+                className="flex justify-evenly items-center w-full text-white border
+                font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:hover:bg-[#050708]/30 me-2 mb-2"
+            >
+                Create una cuenta
+            </Link>
+        </div>
+    )
+}
