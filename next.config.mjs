@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images:{
+    images: {
         loader: "custom",
         loaderFile: "./src/utils/Loader.js",
-    }
+    },
+    cacheComponents: true,
 };
 
 export default nextConfig;

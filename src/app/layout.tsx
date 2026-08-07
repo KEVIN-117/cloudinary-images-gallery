@@ -4,6 +4,11 @@ import "./globals.css";
 import {Container} from "@/components/Home/NavBar/Container";
 import Footer from "@/components/Home/Footer/Footer";
 import {SupabaseProvider} from "@/context/SupabaseContext";
+
+// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false;
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

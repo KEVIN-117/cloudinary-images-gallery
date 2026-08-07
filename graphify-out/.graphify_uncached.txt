@@ -1,0 +1,5 @@
+C:\Users\krodr\profile\repos\cloudinary-images-gallery\README.md
+C:\Users\krodr\profile\repos\cloudinary-images-gallery\public\arch.jpg
+C:\Users\krodr\profile\repos\cloudinary-images-gallery\public\next.svg
+C:\Users\krodr\profile\repos\cloudinary-images-gallery\public\vercel.svg
+C:\Users\krodr\profile\repos\cloudinary-images-gallery\src\app\icon.svg

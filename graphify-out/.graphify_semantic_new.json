@@ -1,0 +1,271 @@
+{
+  "nodes": [
+    {
+      "id": "readme_next_js",
+      "label": "Next.js",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_create_next_app",
+      "label": "create-next-app",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_music_home_tsx",
+      "label": "app/MusicHome.tsx",
+      "file_type": "code",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_next_font",
+      "label": "next/font",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_inter_font",
+      "label": "Inter Google Font",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_vercel_platform",
+      "label": "Vercel Platform",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_arch_illustration",
+      "label": "Dark Anime Illustration",
+      "file_type": "image",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_arch_dark_anime_character",
+      "label": "Dark Anime Character",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_arch_fanged_mask",
+      "label": "Fanged Mask",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_arch_demon_horns",
+      "label": "Demon Horns",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_arch_red_sun_background",
+      "label": "Red Sun Background",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "c_users_krodr_profile_repos_cloudinary_images_gallery_public_next_logo",
+      "label": "Next.js Logo",
+      "file_type": "image",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\next.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_vercel_logo",
+      "label": "Vercel Logo",
+      "file_type": "image",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\vercel.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src_app_icon_image",
+      "label": "App Icon",
+      "file_type": "image",
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\src\\app\\icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "readme_create_next_app",
+      "target": "readme_next_js",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_next_font",
+      "target": "readme_inter_font",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_vercel_platform",
+      "target": "readme_next_js",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_music_home_tsx",
+      "target": "readme_next_font",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_arch_illustration",
+      "target": "public_arch_dark_anime_character",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_arch_dark_anime_character",
+      "target": "public_arch_fanged_mask",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_arch_dark_anime_character",
+      "target": "public_arch_demon_horns",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_arch_illustration",
+      "target": "public_arch_red_sun_background",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "readme_nextjs_ecosystem",
+      "label": "Next.js Ecosystem Tools",
+      "nodes": [
+        "readme_next_js",
+        "readme_create_next_app",
+        "readme_vercel_platform",
+        "readme_next_font"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\README.md"
+    },
+    {
+      "id": "public_arch_character_design",
+      "label": "Character Design Elements",
+      "nodes": [
+        "public_arch_dark_anime_character",
+        "public_arch_fanged_mask",
+        "public_arch_demon_horns"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\krodr\\profile\\repos\\cloudinary-images-gallery\\public\\arch.jpg"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

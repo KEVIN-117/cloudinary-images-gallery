@@ -248,4 +248,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Planificacion (Tickets, diagramas, etc)
+/planning/
+
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,macos,linux
