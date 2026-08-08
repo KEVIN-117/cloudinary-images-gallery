@@ -2,7 +2,7 @@ import { Button } from "@/components/atoms/button";
 
 export default function BentoFeatures() {
   return (
-    <section className="max-w-7xl mx-auto py-24 px-4 w-full">
+    <section id="features" className="max-w-7xl mx-auto py-24 px-4 w-full">
       <div className="flex flex-col items-center mb-16 text-center">
         <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
           Architected for <span className="text-gradient">Eternity</span>
@@ -24,14 +24,14 @@ export default function BentoFeatures() {
             </p>
           </div>
           <div className="z-10">
-             <Button variant="outline" className="rounded-full px-6 glass text-xs tracking-wider">Read Specs</Button>
+            <Button variant="outline" className="rounded-full px-6 glass text-xs tracking-wider">Read Specs</Button>
           </div>
         </div>
 
         {/* Medium Feature */}
         <div className="glass-card p-8 flex flex-col justify-between relative overflow-hidden group backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-           <div className="absolute bottom-0 right-0 w-32 h-32 bg-cyan-500/20 rounded-full blur-[50px] group-hover:bg-cyan-500/40 group-hover:scale-125 transition-all duration-700" />
-           <div className="z-10">
+          <div className="absolute bottom-0 right-0 w-32 h-32 bg-cyan-500/20 rounded-full blur-[50px] group-hover:bg-cyan-500/40 group-hover:scale-125 transition-all duration-700" />
+          <div className="z-10">
             <p className="text-xs font-mono text-cyan-400 mb-2 tracking-wider uppercase">02 / Auth</p>
             <h3 className="text-xl font-semibold mb-2">Supabase SSR</h3>
             <p className="text-sm text-muted-foreground">
@@ -42,8 +42,8 @@ export default function BentoFeatures() {
 
         {/* Medium Feature */}
         <div className="glass-card p-8 flex flex-col justify-between relative overflow-hidden group backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-           <div className="absolute top-0 left-0 w-32 h-32 bg-violet-500/20 rounded-full blur-[50px] group-hover:bg-violet-500/40 group-hover:scale-125 transition-all duration-700" />
-           <div className="z-10">
+          <div className="absolute top-0 left-0 w-32 h-32 bg-violet-500/20 rounded-full blur-[50px] group-hover:bg-violet-500/40 group-hover:scale-125 transition-all duration-700" />
+          <div className="z-10">
             <p className="text-xs font-mono text-violet-400 mb-2 tracking-wider uppercase">03 / State</p>
             <h3 className="text-xl font-semibold mb-2">App Router</h3>
             <p className="text-sm text-muted-foreground">
@@ -54,8 +54,8 @@ export default function BentoFeatures() {
 
         {/* Large Feature */}
         <div className="md:col-span-2 glass-card p-8 flex flex-col justify-center items-center text-center relative overflow-hidden">
-           <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
-           <div className="z-10">
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
+          <div className="z-10">
             <h3 className="text-3xl font-heading font-bold mb-4">Ready to Mint?</h3>
             <Button size="lg" className="rounded-xl px-12 shadow-[0_0_20px_var(--color-primary)] hover:shadow-[0_0_30px_var(--color-primary)]">
               Initialize Vault

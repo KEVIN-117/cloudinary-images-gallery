@@ -16,7 +16,6 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
           <Link href="#features" className="hover:text-foreground transition-colors">Features</Link>
           <Link href="#gallery" className="hover:text-foreground transition-colors">Gallery</Link>
-          <Link href="#roadmap" className="hover:text-foreground transition-colors">Roadmap</Link>
         </div>
 
         <div className="flex items-center gap-3">

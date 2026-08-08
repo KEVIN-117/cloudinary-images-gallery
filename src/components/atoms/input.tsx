@@ -32,21 +32,21 @@ const inputVariants = cva(
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
-    VariantProps<typeof inputVariants> {}
+  VariantProps<typeof inputVariants> {
+  error?: boolean;
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, variant, size, type, "aria-invalid": ariaInvalid, ...props }, ref) => {
+  ({ className, variant, size, type, error, "aria-invalid": ariaInvalid, ...props }, ref) => {
     // Improve accessibility by automatically using the destructive variant if aria-invalid is true
-    const appliedVariant = (ariaInvalid === true || ariaInvalid === "true") && !variant 
-      ? "destructive" 
-      : variant;
+    const appliedVariant = error && !variant ? "destructive" : variant;
 
     return (
       <input
         type={type}
         className={cn(inputVariants({ variant: appliedVariant, size, className }))}
         ref={ref}
-        aria-invalid={ariaInvalid}
+        aria-invalid={error || ariaInvalid ? true : false}
         {...props}
       />
     )
