@@ -1,18 +1,17 @@
 "use client"
-import {CldUploadButton} from "next-cloudinary";
+import { CldUploadButton } from "next-cloudinary";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import {ImageType} from "@/types/Definitions";
+import { ImageType } from "@/types/Definitions";
 import { useRouter } from "next/navigation"
 import Swal from 'sweetalert2'
+import { Upload } from "lucide-react";
 
-import {Upload} from "@/components/assets/icons/Upload";
 
-
-export function Uploader(){
+export function Uploader() {
     const supabase = createClientComponentClient()
     const router = useRouter()
 
-    const handleInsert = async (image: ImageType ) => {
+    const handleInsert = async (image: ImageType) => {
         await supabase.from('images').insert({
             path: image.path,
             public_id: image.public_id,
