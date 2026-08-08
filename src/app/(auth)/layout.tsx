@@ -1,4 +1,3 @@
-import { Logo } from "@/components/atoms/core/Logo";
 import Link from "next/link";
 import Image from "next/image";
 

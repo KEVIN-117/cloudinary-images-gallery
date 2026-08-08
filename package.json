@@ -32,6 +32,7 @@
     "clsx": "^2.1.1",
     "imagemin": "^8.0.1",
     "imagemin-jpegtran": "^7.0.0",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.331.0",
     "next": "16.3.0",
     "next-cloudinary": "^5.20.0",
@@ -39,7 +40,8 @@
     "react-dom": "19.2.8",
     "react-resizable-panels": "^2.1.9",
     "tailwind-merge": "^2.6.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",

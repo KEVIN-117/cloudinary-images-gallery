@@ -4,6 +4,7 @@ import * as React from "react";
 import { Button } from "@/components/atoms/button";
 import { Input } from "@/components/atoms/input";
 import { Label } from "@/components/atoms/label";
+import Link from "next/link";
 
 export function FormLogin() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -37,9 +38,9 @@ export function FormLogin() {
           <div className="grid gap-2 relative group">
             <div className="flex items-center justify-between">
               <Label htmlFor="password" className="text-muted-foreground group-focus-within:text-cyan-400 transition-colors">Password</Label>
-              <a href="#" className="text-xs font-medium text-muted-foreground hover:text-cyan-400 hover:underline transition-colors">
+              <Link href="/forgot-password" className="text-xs font-medium text-muted-foreground hover:text-cyan-400 hover:underline transition-colors">
                 Forgot password?
-              </a>
+              </Link>
             </div>
             <Input
               id="password"
