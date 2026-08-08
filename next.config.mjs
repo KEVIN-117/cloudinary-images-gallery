@@ -3,7 +3,8 @@ const nextConfig = {
     images: {
         loader: "custom",
         loaderFile: "./src/utils/Loader.js",
-    }
+    },
+    cacheComponents: true,
 };
 
 export default nextConfig;
