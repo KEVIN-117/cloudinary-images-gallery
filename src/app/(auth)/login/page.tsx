@@ -6,6 +6,11 @@ import { Auth } from "@/components/organisms/auth/Auth";
 export const instant = false;
 
 
-export default function LoginPage() {
-    return <Auth isLogin={true} />
+interface PageProps {
+    searchParams: Promise<{ message?: string }>
+}
+
+export default async function LoginPage({ searchParams }: PageProps) {
+    const { message } = await searchParams;
+    return <Auth isLogin={true} message={message} />
 }

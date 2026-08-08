@@ -24,13 +24,34 @@ const ToastViewport = React.forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 
 const toastVariants = cva(
-  "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+  // Base: glassmorphism dark card con animaciones de entrada/salida
+  "group pointer-events-auto relative flex w-full items-start gap-3 overflow-hidden rounded-xl border p-4 pr-9 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
   {
     variants: {
       variant: {
-        default: "border bg-background text-foreground",
+        // Neutral: cristal oscuro sin énfasis de color
+        default:
+          "bg-black/60 border-white/10 text-white",
+
+        // Éxito: neón cyan — "Asset saved"
+        success:
+          "bg-cyan-950/70 border-cyan-500/40 text-cyan-100 shadow-[0_0_20px_rgba(34,211,238,0.15)]",
+
+        // Error: neón rose — "Vault breach"
         destructive:
-          "destructive group border-destructive bg-destructive text-destructive-foreground",
+          "destructive group bg-rose-950/70 border-rose-500/40 text-rose-100 shadow-[0_0_20px_rgba(244,63,94,0.15)]",
+
+        // Advertencia: ámbar cálido — "Caution"
+        warning:
+          "bg-amber-950/70 border-amber-500/40 text-amber-100 shadow-[0_0_20px_rgba(245,158,11,0.15)]",
+
+        // Info: violeta — "System notice"
+        info:
+          "bg-violet-950/70 border-violet-500/40 text-violet-100 shadow-[0_0_20px_rgba(139,92,246,0.15)]",
+
+        // Carga/proceso: fuchsia — "Uploading…"
+        loading:
+          "bg-fuchsia-950/70 border-fuchsia-500/40 text-fuchsia-100 shadow-[0_0_20px_rgba(217,70,239,0.15)]",
       },
     },
     defaultVariants: {
@@ -42,7 +63,7 @@ const toastVariants = cva(
 const Toast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
-    VariantProps<typeof toastVariants>
+  VariantProps<typeof toastVariants>
 >(({ className, variant, ...props }, ref) => {
   return (
     <ToastPrimitives.Root
@@ -93,7 +114,7 @@ const ToastTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Title
     ref={ref}
-    className={cn("text-sm font-semibold", className)}
+    className={cn("text-sm font-semibold font-mono tracking-wide", className)}
     {...props}
   />
 ))
@@ -105,7 +126,7 @@ const ToastDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Description
     ref={ref}
-    className={cn("text-sm opacity-90", className)}
+    className={cn("text-xs opacity-80 leading-relaxed", className)}
     {...props}
   />
 ))
