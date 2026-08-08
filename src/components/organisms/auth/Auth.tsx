@@ -1,47 +1,44 @@
 import Link from "next/link";
 import { FormLogin } from "./Form/FormLogin";
 import { FormRegister } from "./Form/FormRegister";
+import { AuthMessage } from "@/components/atoms/AuthMessage";
 
-export function Auth({ isLogin }: { isLogin: boolean }) {
+interface AuthProps {
+    isLogin: boolean;
+    message?: string;
+}
+
+export function Auth({ isLogin, message }: AuthProps) {
     return (
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
                 <h1 className="text-2xl font-semibold tracking-tight">
-                    {isLogin ? "Welcome back!" : "Create an account"}
+                    {isLogin ? "Welcome back" : "Create account"}
                 </h1>
                 <p className="text-muted-foreground text-sm">
                     {isLogin ? "Sign in to access your vault" : "Initialize your secure visual legacy"}
                 </p>
             </div>
-            
+
+            {/* System message from auth callback (e.g. expired token) */}
+            {message && (
+                <AuthMessage
+                    message={message}
+                    variant="error"
+                />
+            )}
+
             {isLogin ? <FormLogin /> : <FormRegister />}
-            
-            <p className="px-8 text-center text-sm text-muted-foreground">
-                By clicking continue, you agree to our{" "}
-                <Link
-                    href="/terms"
-                    className="underline underline-offset-4 hover:text-primary transition-colors"
-                >
-                    Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link
-                    href="/privacy"
-                    className="underline underline-offset-4 hover:text-primary transition-colors"
-                >
-                    Privacy Policy
-                </Link>
-                .
-            </p>
-            
-            <div className="text-center mt-4">
-               <Link 
-                 href={isLogin ? "/register" : "/login"} 
-                 className="text-sm font-medium hover:text-primary hover:underline transition-colors"
+
+            <div className="text-center">
+               <Link
+                 href={isLogin ? "/register" : "/login"}
+                 className="text-sm text-muted-foreground hover:text-white hover:underline transition-colors"
                >
-                 {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Sign In"}
+                 {isLogin ? "No account yet? Sign up" : "Already have an account? Sign in"}
                </Link>
             </div>
         </div>
     )
 }
+
