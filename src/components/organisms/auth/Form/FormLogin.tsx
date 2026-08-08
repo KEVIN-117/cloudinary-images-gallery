@@ -23,12 +23,13 @@ export function FormLogin() {
     validators: {
       onChange: userLoginSchema,
     },
-    onSubmit: async ({ value }) => {
+    onSubmit: async ({ value, formApi }) => {
       const result = await loginUser(value);
       if (result.error) {
         notify.error(result.error.message)
       } else {
         notify.success(result.message)
+        formApi.reset()
         redirect("/dashboard/gallery")
       }
     }

@@ -23,12 +23,13 @@ export function FormRegister() {
     validators: {
       onChange: userRegistrationSchema,
     },
-    onSubmit: async ({ value }) => {
+    onSubmit: async ({ value, formApi }) => {
       const result = await registerUser(value);
       if (result.error) {
         notify.error(result.error.message)
       } else {
         notify.success(result.message)
+        formApi.reset();
         redirect("/welcome")
       }
     }
