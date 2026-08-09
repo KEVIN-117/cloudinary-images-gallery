@@ -24,7 +24,7 @@ export function FormLogin() {
         onSubmit: async ({ value, formApi }) => {
             const result = await loginUser(value);
             if (result.error) {
-                notify.error(result.error.message);
+                notify.error(result.error);
             } else {
                 notify.success(result.message);
                 formApi.reset();
@@ -36,7 +36,7 @@ export function FormLogin() {
     const handleLoginWithGithub = async () => {
         const result = await signInWithGithub();
         if (result.error) {
-            notify.error(result.error.message);
+            notify.error(result.error);
         } else {
             notify.success(result.message);
             redirect(result.data?.url as string);

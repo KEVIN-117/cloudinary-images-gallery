@@ -21,7 +21,6 @@ export async function loginUser(params: IuserLogin): Promise<IResponseAuth> {
         });
 
         if (error) {
-            console.error("Error", error);
             return {
                 message: "Error logging in user",
                 data: null,
@@ -34,11 +33,11 @@ export async function loginUser(params: IuserLogin): Promise<IResponseAuth> {
             data: data,
             error: null,
         };
-    } catch (error: unknown) {
+    } catch (error: any) {
         return {
             message: "Error logging in user",
             data: null,
-            error: error instanceof Error ? error.message : "Unknown error",
+            error: error,
         };
     }
 }
@@ -73,11 +72,11 @@ export async function registerUser(params: IuserRegistration): Promise<IResponse
             data: data,
             error: null,
         };
-    } catch (error: unknown) {
+    } catch (error: any) {
         return {
             message: "Error registering user",
             data: null,
-            error: error instanceof Error ? error.message : "Unknown error",
+            error: error,
         };
     }
 }
@@ -102,11 +101,11 @@ export async function forgotPassword(params: IuserForgotPassword): Promise<IResp
             data: data,
             error: null,
         };
-    } catch (error: unknown) {
+    } catch (error: any) {
         return {
             message: "Error resetting password",
             data: null,
-            error: error instanceof Error ? error.message : "Unknown error",
+            error: error,
         };
     }
 }
@@ -139,11 +138,11 @@ export async function signInWithGithub(): Promise<
             data: data,
             error: null,
         };
-    } catch (error: unknown) {
+    } catch (error: any) {
         return {
             message: "Error logging in user",
             data: null,
-            error: error instanceof Error ? error.message : "Unknown error",
+            error: error,
         };
     }
 }
