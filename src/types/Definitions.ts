@@ -1,4 +1,3 @@
-import { Session, SupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export interface responseTypes {
     info: ImageType
@@ -16,7 +15,3 @@ export interface ImageType {
     blurImage?: string;
 }
 
-export interface SupabaseContextType {
-    supabase: SupabaseClient,
-    authSession: Session | null
-}

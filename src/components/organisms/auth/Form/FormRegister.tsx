@@ -26,11 +26,11 @@ export function FormRegister() {
     onSubmit: async ({ value, formApi }) => {
       const result = await registerUser(value);
       if (result.error) {
-        notify.error(result.error.message)
+        notify.error(result.error)
       } else {
         notify.success(result.message)
         formApi.reset();
-        redirect("/welcome")
+        redirect("/confirm-email")
       }
     }
   })

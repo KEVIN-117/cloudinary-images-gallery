@@ -2,7 +2,7 @@
 const nextConfig = {
     images: {
         loader: "custom",
-        loaderFile: "./src/utils/Loader.js",
+        loaderFile: "./src/utils/Loader.ts",
     },
     cacheComponents: true,
 };

@@ -112,7 +112,7 @@ export function FormLogin() {
             selector={(state) => [state.canSubmit, state.isSubmitting]}
             children={([canSubmit, isSubmitting]) => {
               return (
-                <Button disabled={!canSubmit || isSubmitting} className="mt-4 relative overflow-hidden group shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:shadow-[0_0_25px_rgba(217,70,239,0.6)] transition-all duration-500 border border-fuchsia-500/50">
+                <Button type="submit" disabled={!canSubmit || isSubmitting} className="mt-4 relative overflow-hidden group shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:shadow-[0_0_25px_rgba(217,70,239,0.6)] transition-all duration-500 border border-fuchsia-500/50">
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-400/30 to-violet-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   <span className="relative z-10 flex items-center">
                     {isSubmitting && (
