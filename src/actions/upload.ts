@@ -32,16 +32,15 @@ export async function uploadImagesAction(formData: FormData) {
         };
     }
     const files = formData.getAll("files") as File[];
+
     if (!files || files.length === 0) {
         return { success: false, error: "No se seleccionaron archivos." };
     }
 
     try {
         const insertPromises = files.map(async (file) => {
-            // Sube a Cloudinary
             const result = await uploadImage(file);
 
-            // Guarda metadata en base de datos
             const { error: dbError } = await supabase.from("images").insert({
                 path: result.cloudinaryResponse.secure_url,
                 public_id: result.cloudinaryResponse.public_id,

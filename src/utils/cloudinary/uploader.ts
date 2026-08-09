@@ -56,10 +56,13 @@ export async function uploadImage(file: File): Promise<UploadResult> {
         const uploadStream = cloudinary.uploader.upload_stream(
             {
                 folder: envValidator.server.CLOUDINARY_FOLDER,
-                // Optimizaciones integradas para el Dashboard
-                quality_analysis: true,
+                ...(envValidator.server.CLOUDINARY_UPLOAD_PRESET && {
+                    upload_preset: envValidator.server.CLOUDINARY_UPLOAD_PRESET,
+                }),
+                // quality_analysis: true, // (Requiere add-on, puede causar 403)
             },
             (error: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => {
+
                 if (error || !result) {
                     return reject(error || new Error("Failed to upload image to Cloudinary"));
                 }
@@ -71,6 +74,7 @@ export async function uploadImage(file: File): Promise<UploadResult> {
 
     // Generar el blurDataURL a partir de la imagen que acabamos de subir
     const blurDataUrl = await getBlurDataUrl(uploadResult.public_id);
+
 
     return {
         cloudinaryResponse: uploadResult,

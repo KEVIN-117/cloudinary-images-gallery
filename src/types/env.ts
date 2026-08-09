@@ -16,6 +16,7 @@ export const serverEnvSchema = z.object({
     CLOUDINARY_API_KEY: z.string().min(1, { message: "CLOUDINARY_API_KEY is required" }),
     CLOUDINARY_API_SECRET: z.string().min(1, { message: "CLOUDINARY_API_SECRET is required" }),
     CLOUDINARY_FOLDER: z.string().min(1, { message: "CLOUDINARY_FOLDER is required" }),
+    CLOUDINARY_UPLOAD_PRESET: z.string().optional(),
     NODE_ENV: z.enum(["development", "production"]),
     REDIRECT_URL_PROVIDER: z.string().url({ message: "REDIRECT_URL_PROVIDER must be a valid URL" }),
     APP_URL: z.url({ message: "APP_URL must be a valid URL" }),

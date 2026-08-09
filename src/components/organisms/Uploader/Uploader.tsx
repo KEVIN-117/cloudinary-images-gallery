@@ -111,11 +111,10 @@ export function Uploader() {
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
-                className={`group relative flex cursor-pointer flex-col items-center justify-center rounded-[2rem] border-2 border-dashed p-16 transition-all duration-300 ${
-                    isDragging
-                        ? "scale-[1.02] border-cyan-400 bg-cyan-950/20 shadow-[0_0_60px_rgba(34,211,238,0.2)]"
-                        : "border-white/10 bg-black/40 hover:border-white/20 hover:bg-white/5"
-                }`}
+                className={`group relative flex cursor-pointer flex-col items-center justify-center rounded-[2rem] border-2 border-dashed p-16 transition-all duration-300 ${isDragging
+                    ? "scale-[1.02] border-cyan-400 bg-cyan-950/20 shadow-[0_0_60px_rgba(34,211,238,0.2)]"
+                    : "border-white/10 bg-black/40 hover:border-white/20 hover:bg-white/5"
+                    }`}
             >
                 {/* Glow ring interno */}
                 <div className="pointer-events-none absolute inset-0 rounded-[2rem] bg-gradient-to-b from-transparent to-cyan-900/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

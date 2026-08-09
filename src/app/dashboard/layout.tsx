@@ -22,7 +22,6 @@ export default async function DashboardLayout({ children }: { children: React.Re
             .select("role")
             .eq("id", user.id)
             .single();
-        console.log("profile", profile);
 
         if (profile) {
             userRole = profile.role;
