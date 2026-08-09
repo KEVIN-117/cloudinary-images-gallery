@@ -1,14 +1,16 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
-import { getBlurDataUrl } from "@/utils/cloudinary/uploader";
-import { ImageType } from "@/types/Definitions";
 import { cookies } from "next/headers";
+import type { ImageType } from "@/types/Definitions";
+import { getBlurDataUrl } from "@/utils/cloudinary/uploader";
+import { createClient } from "@/utils/supabase/server";
 
 export async function fetchImages(page: number, pageSize: number = 20): Promise<ImageType[]> {
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
     if (!user) {
         throw new Error("No autorizado");
     }
@@ -27,16 +29,18 @@ export async function fetchImages(page: number, pageSize: number = 20): Promise<
     }
 
     // Generar blurDataUrl en paralelo si la base de datos no lo tiene guardado
-    const imagesWithBlur = await Promise.all((data ?? []).map(async (img: ImageType) => {
-        if (!img.blurImage) {
-            try {
-                img.blurImage = await getBlurDataUrl(img.public_id);
-            } catch (err) {
-                console.error("No se pudo generar blur para", img.public_id);
+    const imagesWithBlur = await Promise.all(
+        (data ?? []).map(async (img: ImageType) => {
+            if (!img.blurImage) {
+                try {
+                    img.blurImage = await getBlurDataUrl(img.public_id);
+                } catch (_err) {
+                    console.error("No se pudo generar blur para", img.public_id);
+                }
             }
-        }
-        return img;
-    }));
+            return img;
+        }),
+    );
 
     return imagesWithBlur;
 }

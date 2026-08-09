@@ -1,12 +1,12 @@
-import { v2 as cloudinary, UploadApiResponse, UploadApiErrorResponse } from "cloudinary"
-import { envValidator } from "../env"
+import { v2 as cloudinary, type UploadApiErrorResponse, type UploadApiResponse } from "cloudinary";
+import { envValidator } from "@/utils/env";
 
 cloudinary.config({
     cloud_name: envValidator.server.CLOUDINARY_CLOUD_NAME,
     api_key: envValidator.server.CLOUDINARY_API_KEY,
     api_secret: envValidator.server.CLOUDINARY_API_SECRET,
     secure: true,
-})
+});
 
 /**
  * Genera un blurDataURL (placeholder base64) a partir del public_id de Cloudinary.
@@ -19,9 +19,8 @@ export async function getBlurDataUrl(publicId: string): Promise<string> {
         quality: "auto",
         format: "webp", // Formato más eficiente
         effect: "blur:1000", // Desenfoque directo desde la API de Cloudinary
-        sign_url: true // Firma la URL en caso de que Strict Transformations esté habilitado en Cloudinary
+        sign_url: true, // Firma la URL en caso de que Strict Transformations esté habilitado en Cloudinary
     });
-
 
     try {
         const response = await fetch(url);
@@ -30,7 +29,7 @@ export async function getBlurDataUrl(publicId: string): Promise<string> {
             throw new Error(`Failed to fetch blur image: ${response.statusText}`);
         }
         const arrayBuffer = await response.arrayBuffer();
-        const base64 = Buffer.from(arrayBuffer).toString('base64');
+        const base64 = Buffer.from(arrayBuffer).toString("base64");
         return `data:image/webp;base64,${base64}`;
     } catch (error) {
         console.error("Error generating blur data URL:", error);
@@ -45,7 +44,7 @@ export interface UploadResult {
 
 /**
  * Sube un archivo (File) a Cloudinary utilizando un stream y genera un BlurPlaceholder
- * 
+ *
  * @param file - Objeto File proveniente de un FormData en Server Actions.
  * @returns Promesa que se resuelve con la respuesta de Cloudinary y el blurDataUrl.
  */
@@ -65,7 +64,7 @@ export async function uploadImage(file: File): Promise<UploadResult> {
                     return reject(error || new Error("Failed to upload image to Cloudinary"));
                 }
                 resolve(result);
-            }
+            },
         );
         uploadStream.end(buffer);
     });
@@ -75,6 +74,6 @@ export async function uploadImage(file: File): Promise<UploadResult> {
 
     return {
         cloudinaryResponse: uploadResult,
-        blurDataUrl
+        blurDataUrl,
     };
 }

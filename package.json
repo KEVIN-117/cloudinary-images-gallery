@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome check --write --unsafe ."
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -44,6 +46,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.7",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/imagemin": "^8.0.5",
     "@types/imagemin-jpegtran": "^5.0.4",
@@ -51,8 +54,6 @@
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
     "autoprefixer": "^10.5.4",
-    "eslint": "10.8.0",
-    "eslint-config-next": "16.3.0",
     "postcss": "^8.5.26",
     "shadcn": "^4.16.2",
     "tailwindcss": "^4.3.3",

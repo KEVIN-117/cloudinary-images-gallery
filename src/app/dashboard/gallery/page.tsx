@@ -1,6 +1,6 @@
-import Gallery from "@/components/organisms/Gallery";
 import { Suspense } from "react";
 import { ImageSkeletonContainer } from "@/components/molecules/Skeletons/Skeletons";
+import Gallery from "@/components/organisms/Gallery";
 
 export default function Page() {
     return (

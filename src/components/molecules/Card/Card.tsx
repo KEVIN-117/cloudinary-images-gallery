@@ -1,37 +1,37 @@
 "use client";
 
+import { Dialog, Transition } from "@headlessui/react";
+import { DownloadIcon, ExternalLinkIcon, Maximize2Icon, XIcon } from "lucide-react";
 import Image from "next/image";
-import { ImageType } from "@/types/Definitions";
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useState } from "react";
+import type { ImageType } from "@/types/Definitions";
 import downloadPhoto from "@/utils/Downloader";
 import cloudinaryLoader from "@/utils/Loader";
-import { DownloadIcon, ExternalLinkIcon, XIcon, Maximize2Icon } from "lucide-react";
 
 export function Card({ image }: { image: ImageType }) {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
 
     function closeModal() {
-        setIsOpen(false)
+        setIsOpen(false);
     }
 
     function openModal() {
-        setIsOpen(true)
+        setIsOpen(true);
     }
 
     return (
         <>
             <button
                 key={image.public_id + image.original_filename}
-                className="group relative block w-full cursor-zoom-in rounded-2xl overflow-hidden bg-black/40 border border-white/5 transition-all duration-500 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:-translate-y-1"
+                className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl border border-white/5 bg-black/40 transition-all duration-500 hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]"
                 onClick={openModal}
             >
                 {/* Glow Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <Image
                     alt={image.original_filename || image.public_id}
-                    className="w-full h-auto transform rounded-2xl brightness-90 transition-all duration-700 will-change-transform group-hover:brightness-110 group-hover:scale-105"
+                    className="h-auto w-full transform rounded-2xl brightness-90 transition-all duration-700 will-change-transform group-hover:scale-105 group-hover:brightness-110"
                     style={{ transform: "translate3d(0, 0, 0)" }}
                     // Usamos el placeholder blur que viene de la BD o generado al vuelo
                     placeholder={image.blurImage ? "blur" : "empty"}
@@ -43,12 +43,16 @@ export function Card({ image }: { image: ImageType }) {
                 />
 
                 {/* Hover UI Elements */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-20 flex justify-between items-end">
+                <div className="absolute right-0 bottom-0 left-0 z-20 flex translate-y-4 items-end justify-between p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                     <div className="flex flex-col text-left">
-                        <span className="text-cyan-400 font-mono text-[10px] uppercase tracking-widest">{image.width}x{image.height}</span>
-                        <span className="text-cyan-400 font-mono text-[10px] uppercase tracking-widest">{image.id}</span>
+                        <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-widest">
+                            {image.width}x{image.height}
+                        </span>
+                        <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-widest">
+                            {image.id}
+                        </span>
                     </div>
-                    <div className="p-2 rounded-full bg-white/10 backdrop-blur-md text-white">
+                    <div className="rounded-full bg-white/10 p-2 text-white backdrop-blur-md">
                         <Maximize2Icon className="size-4" />
                     </div>
                 </div>
@@ -81,27 +85,31 @@ export function Card({ image }: { image: ImageType }) {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="relative w-full max-w-6xl transform transition-all flex flex-col items-center justify-center group/modal">
-
+                                <Dialog.Panel className="group/modal relative flex w-full max-w-6xl transform flex-col items-center justify-center transition-all">
                                     {/* Action Buttons Top Right */}
-                                    <div className="absolute -top-12 right-0 md:top-4 md:-right-16 flex md:flex-col gap-3 z-50">
+                                    <div className="absolute -top-12 right-0 z-50 flex gap-3 md:top-4 md:-right-16 md:flex-col">
                                         <button
-                                            className="p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-rose-500 hover:border-rose-500 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)] backdrop-blur-md transition-all"
+                                            className="rounded-full border border-white/10 bg-black/50 p-3 text-white backdrop-blur-md transition-all hover:border-rose-500 hover:bg-rose-500 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]"
                                             onClick={closeModal}
                                             title="Cerrar"
                                         >
                                             <XIcon className="size-5" />
                                         </button>
                                         <button
-                                            className="p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-cyan-500 hover:border-cyan-500 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] backdrop-blur-md transition-all"
+                                            className="rounded-full border border-white/10 bg-black/50 p-3 text-white backdrop-blur-md transition-all hover:border-cyan-500 hover:bg-cyan-500 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
                                             onClick={() => window.open(image.secure_url, "_blank")}
                                             title="Abrir Original"
                                         >
                                             <ExternalLinkIcon className="size-5" />
                                         </button>
                                         <button
-                                            className="p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-fuchsia-500 hover:border-fuchsia-500 hover:shadow-[0_0_20px_rgba(217,70,239,0.4)] backdrop-blur-md transition-all"
-                                            onClick={() => downloadPhoto(image.secure_url, image.original_filename)}
+                                            className="rounded-full border border-white/10 bg-black/50 p-3 text-white backdrop-blur-md transition-all hover:border-fuchsia-500 hover:bg-fuchsia-500 hover:shadow-[0_0_20px_rgba(217,70,239,0.4)]"
+                                            onClick={() =>
+                                                downloadPhoto(
+                                                    image.secure_url,
+                                                    image.original_filename,
+                                                )
+                                            }
                                             title="Descargar"
                                         >
                                             <DownloadIcon className="size-5" />
@@ -109,10 +117,10 @@ export function Card({ image }: { image: ImageType }) {
                                     </div>
 
                                     {/* Modal Image */}
-                                    <div className="relative rounded-lg overflow-hidden ring-1 ring-white/10 shadow-[0_0_80px_rgba(34,211,238,0.1)]">
+                                    <div className="relative overflow-hidden rounded-lg shadow-[0_0_80px_rgba(34,211,238,0.1)] ring-1 ring-white/10">
                                         <Image
                                             alt={image.original_filename || image.public_id}
-                                            className="max-h-[85vh] w-auto object-contain rounded-lg"
+                                            className="max-h-[85vh] w-auto rounded-lg object-contain"
                                             src={image.secure_url}
                                             width={image.width}
                                             height={image.height}
@@ -123,10 +131,11 @@ export function Card({ image }: { image: ImageType }) {
                                     </div>
 
                                     {/* Meta Info Bottom */}
-                                    <div className="absolute -bottom-12 left-0 right-0 text-center opacity-0 group-hover/modal:opacity-100 transition-opacity duration-300">
-                                        <p className="text-white/70 font-mono text-sm">{image.original_filename}</p>
+                                    <div className="absolute right-0 -bottom-12 left-0 text-center opacity-0 transition-opacity duration-300 group-hover/modal:opacity-100">
+                                        <p className="font-mono text-sm text-white/70">
+                                            {image.original_filename}
+                                        </p>
                                     </div>
-
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
@@ -134,5 +143,5 @@ export function Card({ image }: { image: ImageType }) {
                 </Dialog>
             </Transition>
         </>
-    )
+    );
 }
