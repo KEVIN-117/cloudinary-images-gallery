@@ -1,40 +1,41 @@
-import { MailCheckIcon, ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon, MailCheckIcon } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/atoms/button";
 import { cn } from "@/lib/utils";
 
 export default function ConfirmEmailPage() {
     return (
-        <div className="flex flex-col items-center justify-center space-y-6 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="fade-in slide-in-from-bottom-4 flex animate-in flex-col items-center justify-center space-y-6 text-center duration-700">
             {/* Ícono central con brillo bioluminiscente */}
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-cyan-950/30 border border-cyan-500/20 shadow-[0_0_40px_rgba(6,182,212,0.15)] relative overflow-hidden group">
-                <div className="absolute inset-0 bg-cyan-500/10 group-hover:bg-cyan-500/20 transition-colors duration-500" />
-                <MailCheckIcon className="h-10 w-10 text-cyan-400 drop-shadow-[0_0_12px_rgba(34,211,238,0.8)] relative z-10 animate-pulse" />
+            <div className="group relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border border-cyan-500/20 bg-cyan-950/30 shadow-[0_0_40px_rgba(6,182,212,0.15)]">
+                <div className="absolute inset-0 bg-cyan-500/10 transition-colors duration-500 group-hover:bg-cyan-500/20" />
+                <MailCheckIcon className="relative z-10 h-10 w-10 animate-pulse text-cyan-400 drop-shadow-[0_0_12px_rgba(34,211,238,0.8)]" />
             </div>
 
             <div className="space-y-3">
-                <h1 className="text-2xl font-semibold tracking-tight text-white font-heading">
+                <h1 className="font-heading font-semibold text-2xl text-white tracking-tight">
                     Verifica tu bandeja de entrada
                 </h1>
-                <p className="text-sm text-muted-foreground leading-relaxed px-4">
+                <p className="px-4 text-muted-foreground text-sm leading-relaxed">
                     Hemos enviado un enlace encriptado para confirmar tu identidad.
                     <br />
                     Haz clic en el enlace para habilitar tu acceso al
-                    <span className="text-cyan-400 font-mono text-xs mx-1 px-1.5 py-0.5 bg-cyan-400/10 rounded border border-cyan-400/20">
+                    <span className="mx-1 rounded border border-cyan-400/20 bg-cyan-400/10 px-1.5 py-0.5 font-mono text-cyan-400 text-xs">
                         VAULT
-                    </span>.
+                    </span>
+                    .
                 </p>
             </div>
 
-            <div className="pt-6 w-full">
+            <div className="w-full pt-6">
                 <Link
                     href="/login"
                     className={cn(
                         buttonVariants({ variant: "outline" }),
-                        "w-full bg-black/40 border-white/10 hover:bg-white/10 hover:text-white hover:border-cyan-500/30 transition-all duration-300 group"
+                        "group w-full border-white/10 bg-black/40 transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/10 hover:text-white",
                     )}
                 >
-                    <ArrowLeftIcon className="mr-2 h-4 w-4 text-cyan-400/70 group-hover:text-cyan-400 group-hover:-translate-x-1 transition-all" />
+                    <ArrowLeftIcon className="mr-2 h-4 w-4 text-cyan-400/70 transition-all group-hover:-translate-x-1 group-hover:text-cyan-400" />
                     Regresar a la terminal
                 </Link>
             </div>

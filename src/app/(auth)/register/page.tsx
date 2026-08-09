@@ -5,5 +5,5 @@ import { Auth } from "@/components/organisms/auth/Auth";
 export const instant = false;
 
 export default function register() {
-    return <Auth isLogin={false} />
+    return <Auth isLogin={false} />;
 }

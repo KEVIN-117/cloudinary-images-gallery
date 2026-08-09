@@ -1,6 +1,5 @@
-
 export interface responseTypes {
-    info: ImageType
+    info: ImageType;
     event: "success" | "error" | "progress";
 }
 
@@ -14,4 +13,3 @@ export interface ImageType {
     original_filename: string;
     blurImage?: string;
 }
-
