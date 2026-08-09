@@ -1,11 +1,16 @@
 "use client";
+
 import Image from "next/image";
 import { ImageType } from "@/types/Definitions";
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import downloadPhoto from "@/utils/Downloader";
+import cloudinaryLoader from "@/utils/Loader";
+import { DownloadIcon, ExternalLinkIcon, XIcon, Maximize2Icon } from "lucide-react";
+
 export function Card({ image }: { image: ImageType }) {
     const [isOpen, setIsOpen] = useState(false)
+
     function closeModal() {
         setIsOpen(false)
     }
@@ -18,25 +23,40 @@ export function Card({ image }: { image: ImageType }) {
         <>
             <button
                 key={image.public_id + image.original_filename}
-                className="image transition ease-in-out hover:shadow-red-700 shadow-xl delay-200 hover:-translate-y-1 hover:scale-105
-            after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0
-            after:rounded-lg after:shadow-highlight"
+                className="group relative block w-full cursor-zoom-in rounded-2xl overflow-hidden bg-black/40 border border-white/5 transition-all duration-500 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:-translate-y-1"
                 onClick={openModal}
             >
+                {/* Glow Overlay on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+
                 <Image
-                    alt={image.public_id}
-                    className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
+                    alt={image.original_filename || image.public_id}
+                    className="w-full h-auto transform rounded-2xl brightness-90 transition-all duration-700 will-change-transform group-hover:brightness-110 group-hover:scale-105"
                     style={{ transform: "translate3d(0, 0, 0)" }}
-                    //placeholder="blur"
-                    //blurDataURL={blurDataUrl}
+                    // Usamos el placeholder blur que viene de la BD o generado al vuelo
+                    placeholder={image.blurImage ? "blur" : "empty"}
+                    blurDataURL={image.blurImage}
                     src={image.secure_url}
                     width={image.width}
                     height={image.height}
-                    unoptimized
+                    loader={cloudinaryLoader}
                 />
+
+                {/* Hover UI Elements */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-20 flex justify-between items-end">
+                    <div className="flex flex-col text-left">
+                        <span className="text-cyan-400 font-mono text-[10px] uppercase tracking-widest">{image.width}x{image.height}</span>
+                        <span className="text-cyan-400 font-mono text-[10px] uppercase tracking-widest">{image.id}</span>
+                    </div>
+                    <div className="p-2 rounded-full bg-white/10 backdrop-blur-md text-white">
+                        <Maximize2Icon className="size-4" />
+                    </div>
+                </div>
             </button>
+
+            {/* Modal de visualización */}
             <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                <Dialog as="div" className="relative z-50" onClose={closeModal}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -46,83 +66,69 @@ export function Card({ image }: { image: ImageType }) {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-black/25" />
+                        {/* Background Overlay */}
+                        <div className="fixed inset-0 bg-black/90 backdrop-blur-xl" />
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto">
-                        <div
-                            className="relative flex min-h-full items-center justify-center p-4 text-center blur-smooth bg-black/25 backdrop-filter backdrop-blur-lg"
-                        >
+                        <div className="flex min-h-full items-center justify-center p-4 md:p-8">
                             <Transition.Child
                                 as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-200"
+                                enter="ease-out duration-400 cubic-bezier(0.16, 1, 0.3, 1)"
+                                enterFrom="opacity-0 scale-95 translate-y-4"
+                                enterTo="opacity-100 scale-100 translate-y-0"
+                                leave="ease-in duration-300"
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel
-                                    className="w-full max-w-xl transform overflow-hidden rounded-2xl
-                                    p-2 shadow-xl transition-all
-                                    text-left align-middle">
-                                    <img
-                                        alt={image.public_id}
-                                        className={`transform rounded-lg md:h-[90vh] h-auto brightness-90 transition will-change-auto group-hover:brightness-110 delay-200 hover:-translate-y-1 hover:scale-105`}
-                                        style={{
-                                            transform: "translate3d(0, 0, 0)",
-                                            boxShadow: "0 0 40px #7895B3",
-                                        }}
-                                        src={image.secure_url}
-                                        width={image.width}
-                                        height={image.height}
-                                    />
-                                    <div
-                                        className="absolute top-0 w-[98%] pt-2 flex justify-between p-2">
+                                <Dialog.Panel className="relative w-full max-w-6xl transform transition-all flex flex-col items-center justify-center group/modal">
 
-                                        <div className='flex flex-col gap-1'>
-                                            <button className='bg-indigo-950 rounded-full p-2' onClick={closeModal}>
-                                                <svg className="w-10 h-10 text-white"
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="2"
-                                                        d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div className='flex flex-col gap-1'>
-                                            <button
-                                                className='bg-indigo-950 rounded-full p-2'
-                                                onClick={() => window.open(image.secure_url, "_blank")}
-                                            >
-                                                <svg className="w-10 h-10 text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" strokeLinecap="round"
-                                                        strokeLinejoin="round" strokeWidth="2"
-                                                        d="M18 14v4.8a1.2 1.2 0 0 1-1.2 1.2H5.2A1.2 1.2 0 0 1 4 18.8V7.2A1.2 1.2 0 0 1 5.2 6h4.6m4.4-2H20v5.8m-7.9 2L20 4.2" />
-                                                </svg>
-                                            </button>
-                                            <button
-                                                className='bg-indigo-950 rounded-full p-2'
-                                                onClick={() => downloadPhoto(image.secure_url, image.original_filename)}
-                                            >
-                                                <svg className="w-10 h-10 text-white"
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="2"
-                                                        d="M12 13V4M7 14H5a1 1 0 0 0-1 1v4c0 .6.4 1 1 1h14c.6 0 1-.4 1-1v-4c0-.6-.4-1-1-1h-2m-1-5-4 5-4-5m9 8h0" />
-                                                </svg>
-                                            </button>
-                                        </div>
-
+                                    {/* Action Buttons Top Right */}
+                                    <div className="absolute -top-12 right-0 md:top-4 md:-right-16 flex md:flex-col gap-3 z-50">
+                                        <button
+                                            className="p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-rose-500 hover:border-rose-500 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)] backdrop-blur-md transition-all"
+                                            onClick={closeModal}
+                                            title="Cerrar"
+                                        >
+                                            <XIcon className="size-5" />
+                                        </button>
+                                        <button
+                                            className="p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-cyan-500 hover:border-cyan-500 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] backdrop-blur-md transition-all"
+                                            onClick={() => window.open(image.secure_url, "_blank")}
+                                            title="Abrir Original"
+                                        >
+                                            <ExternalLinkIcon className="size-5" />
+                                        </button>
+                                        <button
+                                            className="p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-fuchsia-500 hover:border-fuchsia-500 hover:shadow-[0_0_20px_rgba(217,70,239,0.4)] backdrop-blur-md transition-all"
+                                            onClick={() => downloadPhoto(image.secure_url, image.original_filename)}
+                                            title="Descargar"
+                                        >
+                                            <DownloadIcon className="size-5" />
+                                        </button>
                                     </div>
+
+                                    {/* Modal Image */}
+                                    <div className="relative rounded-lg overflow-hidden ring-1 ring-white/10 shadow-[0_0_80px_rgba(34,211,238,0.1)]">
+                                        <Image
+                                            alt={image.original_filename || image.public_id}
+                                            className="max-h-[85vh] w-auto object-contain rounded-lg"
+                                            src={image.secure_url}
+                                            width={image.width}
+                                            height={image.height}
+                                            placeholder={image.blurImage ? "blur" : "empty"}
+                                            blurDataURL={image.blurImage}
+                                            loader={cloudinaryLoader}
+                                        />
+                                    </div>
+
+                                    {/* Meta Info Bottom */}
+                                    <div className="absolute -bottom-12 left-0 right-0 text-center opacity-0 group-hover/modal:opacity-100 transition-opacity duration-300">
+                                        <p className="text-white/70 font-mono text-sm">{image.original_filename}</p>
+                                    </div>
+
                                 </Dialog.Panel>
                             </Transition.Child>
-
                         </div>
                     </div>
                 </Dialog>

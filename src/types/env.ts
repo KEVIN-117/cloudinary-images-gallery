@@ -14,6 +14,7 @@ export const serverEnvSchema = z.object({
   CLOUDINARY_FOLDER: z.string().min(1, { message: "CLOUDINARY_FOLDER is required" }),
   NODE_ENV: z.enum(["development", "production"]),
   REDIRECT_URL_PROVIDER: z.string().url({ message: "REDIRECT_URL_PROVIDER must be a valid URL" }),
+  APP_URL: z.url({ message: "APP_URL must be a valid URL" }),
 });
 
 export type ClientEnv = z.infer<typeof clientEnvSchema>;

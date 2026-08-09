@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 export interface IResponseAuth {
     message: string;
     data: any;
-    error?: Error | null;
+    error?: string | null;
 }
 
 
@@ -26,7 +26,7 @@ export async function loginUser(params: IuserLogin): Promise<IResponseAuth> {
             return {
                 message: "Error logging in user",
                 data: null,
-                error: error
+                error: error.message
             }
         }
 
@@ -41,7 +41,7 @@ export async function loginUser(params: IuserLogin): Promise<IResponseAuth> {
         return {
             message: "Error logging in user",
             data: null,
-            error: error
+            error: error.message || "Unknown error"
         }
     }
 }
@@ -58,7 +58,8 @@ export async function registerUser(params: IuserRegistration): Promise<IResponse
                 data: {
                     user_name: params.username,
                     profile_image: '',
-                }
+                },
+                emailRedirectTo: `${envValidator.server.APP_URL}/callback?next=/welcome`,
             }
         });
 
@@ -67,7 +68,7 @@ export async function registerUser(params: IuserRegistration): Promise<IResponse
             return {
                 message: "Error registering user",
                 data: null,
-                error: error
+                error: error.message
             }
         }
 
@@ -82,7 +83,7 @@ export async function registerUser(params: IuserRegistration): Promise<IResponse
         return {
             message: "Error registering user",
             data: null,
-            error: error
+            error: error.message || "Unknown error"
         }
     }
 }
@@ -99,7 +100,7 @@ export async function forgotPassword(params: IuserForgotPassword): Promise<IResp
             return {
                 message: "Error resetting password",
                 data: null,
-                error: error
+                error: error.message
             }
         }
 
@@ -114,7 +115,7 @@ export async function forgotPassword(params: IuserForgotPassword): Promise<IResp
         return {
             message: "Error resetting password",
             data: null,
-            error: error
+            error: error.message || "Unknown error"
         }
     }
 }
@@ -137,7 +138,7 @@ export async function signInWithGithub(): Promise<IResponseAuth & { data: { url:
             return {
                 message: "Error logging in user",
                 data: null,
-                error: error
+                error: error.message
             }
         }
 
@@ -152,7 +153,7 @@ export async function signInWithGithub(): Promise<IResponseAuth & { data: { url:
         return {
             message: "Error logging in user",
             data: null,
-            error: error
+            error: error.message || "Unknown error"
         }
     }
 }
@@ -167,7 +168,7 @@ export async function signOut() {
         return {
             message: "Error signing out user",
             data: null,
-            error: error
+            error: error.message
         }
     }
 
